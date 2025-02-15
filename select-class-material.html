@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Sélectionner la Classe et Matériel</title>
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="assets/css/main.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h2>Sélectionner la Classe et le Matériel</h2>
+      <form id="selectionForm">
+        <label for="classroom">Salle disponible:</label>
+        <select id="classroom" class="form-control">
+          <option>Salle 101</option>
+          <option>Salle 202</option>
+        </select>
+        <label for="multiprise">Nombre de multiprises:</label>
+        <input
+          type="number"
+          id="multiprise"
+          class="form-control"
+          min="1"
+          value="1"
+        />
+        <label for="projector">Nombre de projecteurs:</label>
+        <input
+          type="number"
+          id="projector"
+          class="form-control"
+          min="1"
+          value="1"
+        />
+        <button type="submit" class="btn btn-primary mt-3">Confirmer</button>
+      </form>
+    </div>
+
+    <script>
+      document
+        .getElementById("selectionForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Empêcher l'envoi du formulaire
+
+          // Récupérer les valeurs sélectionnées
+          const salle = document.getElementById("classroom").value;
+          const multiprise = document.getElementById("multiprise").value;
+          const projecteur = document.getElementById("projector").value;
+
+          // Enregistrer les données dans le localStorage
+          localStorage.setItem("salle", salle);
+          localStorage.setItem("multiprise", multiprise);
+          localStorage.setItem("projecteur", projecteur);
+
+          // Rediriger vers la page pour générer le PDF
+          window.location.href = "generate_pdf.html"; // Redirige vers la page de génération du PDF
+        });
+    </script>
+  </body>
+</html>

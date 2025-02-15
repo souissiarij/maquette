@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Admin - Validation des Demandes</title>
+
+    <!-- CSS Files -->
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="assets/css/main.css" rel="stylesheet" />
+
+    <!-- jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  </head>
+
+  <body class="index-page">
+    <header id="header" class="header sticky-top">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a href="index.html" class="logo d-flex align-items-center me-auto">
+          <img class="imglogo" src="assets/img/logo.png" alt="" />
+        </a>
+        <nav id="navmenu" class="navmenu">
+          <ul class="d-flex align-items-center">
+            <li><a href="index.html" class="active">Home</a></li>
+           
+            <!-- Bouton Générer des Comptes ajouté ici -->
+            <li>
+              <a href="generate-accounts.html" class="btn btn-primary"
+                >Générer des Comptes</a
+              >
+            </li>
+            <li>
+              <a href="messagerie.html" class="btn btn-secondary"
+                >Boîte de Messagerie</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section id="admin" class="section">
+      <div class="container section-title text-center">
+        <h2>Admin Panel</h2>
+        <p>Validation des Demandes </p>
+      </div>
+
+      <div class="container">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Événement</th>
+              <th>Date</th>
+              <th>Heure</th>
+              <th>Membres</th>
+              <th>Matériel</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="request1">
+              <td>Conférence Robotique</td>
+              <td>20 Février 2025</td>
+              <td>10:00</td>
+              <td>15</td>
+              <td>Multiprise, Projecteur</td>
+              <td>
+                <button
+                  class="btn btn-success"
+                  onclick="openApprovalModal('request1')"
+                >
+                  Approuver
+                </button>
+                <button class="btn btn-danger" onclick="rejectRequest(this)">
+                  Refuser
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <script>
+      function openApprovalModal(requestId) {
+        window.location.href =
+          "select-class-material.html?requestId=" + requestId;
+      }
+
+      function rejectRequest(button) {
+        const row = button.closest("tr");
+        alert("Demande refusée pour " + row.cells[0].textContent);
+        row.style.backgroundColor = "#f8d7da";
+      }
+
+      function generatePDF(rowId, salle, multiprise, projecteur) {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        var row = document.getElementById(rowId);
+        var evenement = row.cells[0].textContent;
+        var date = row.cells[1].textContent;
+        var heure = row.cells[2].textContent;
+        var membres = row.cells[3].textContent;
+
+        doc.setFontSize(18);
+        doc.text("Demande d'Événement", 20, 20);
+        doc.setFontSize(12);
+        doc.text("Événement: " + evenement, 20, 40);
+        doc.text("Date: " + date, 20, 50);
+        doc.text("Heure: " + heure, 20, 60);
+        doc.text("Nombre de Membres: " + membres, 20, 70);
+        doc.text("Salle attribuée: " + salle, 20, 80);
+        doc.text("Multiprises: " + multiprise, 20, 90);
+        doc.text("Projecteurs: " + projecteur, 20, 100);
+        doc.save(evenement + "_demande.pdf");
+      }
+    </script>
+  </body>
+</html>

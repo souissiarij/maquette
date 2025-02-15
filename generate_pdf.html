@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Générer le PDF</title>
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="assets/css/main.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h2>Informations sur l'Événement</h2>
+      <p>Voici les informations complètes pour l'événement :</p>
+
+      <div id="summary">
+        <p><strong>Nom de l'Événement:</strong> <span id="evenement"></span></p>
+        <p><strong>Date:</strong> <span id="date"></span></p>
+        <p><strong>Heure:</strong> <span id="heure"></span></p>
+        <p><strong>Nombre de Membres:</strong> <span id="membres"></span></p>
+        <p><strong>Salle attribuée:</strong> <span id="salle"></span></p>
+        <p><strong>Multiprises:</strong> <span id="multiprise"></span></p>
+        <p><strong>Projecteurs:</strong> <span id="projecteur"></span></p>
+      </div>
+
+      <button id="generatePdfButton" class="btn btn-primary mt-3">
+        Générer le PDF
+      </button>
+    </div>
+
+    <script>
+      // Récupérer les données depuis localStorage
+      const salle = localStorage.getItem("salle");
+      const multiprise = localStorage.getItem("multiprise");
+      const projecteur = localStorage.getItem("projecteur");
+
+      // Les données de l'événement que tu veux inclure dans le PDF
+      const evenement = "Conférence Robotique";
+      const date = "20 Février 2025";
+      const heure = "10:00";
+      const membres = "15";
+
+      // Vérifier que les données existent avant de les afficher
+      if (salle && multiprise && projecteur) {
+        document.getElementById("evenement").textContent = evenement;
+        document.getElementById("date").textContent = date;
+        document.getElementById("heure").textContent = heure;
+        document.getElementById("membres").textContent = membres;
+        document.getElementById("salle").textContent = salle;
+        document.getElementById("multiprise").textContent = multiprise;
+        document.getElementById("projecteur").textContent = projecteur;
+
+        // Ajouter un événement pour générer le PDF lorsque le bouton est cliqué
+        document
+          .getElementById("generatePdfButton")
+          .addEventListener("click", function () {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Ajouter les informations dans le PDF
+            doc.setFontSize(18);
+            doc.text("Demande d'Événement", 20, 20);
+            doc.setFontSize(12);
+            doc.text("Nom de l'Événement: " + evenement, 20, 30);
+            doc.text("Date: " + date, 20, 40);
+            doc.text("Heure: " + heure, 20, 50);
+            doc.text("Nombre de Membres: " + membres, 20, 60);
+            doc.text("Salle attribuée: " + salle, 20, 70);
+            doc.text("Multiprises: " + multiprise, 20, 80);
+            doc.text("Projecteurs: " + projecteur, 20, 90);
+
+            // Sauvegarder et télécharger le PDF
+            doc.save("demande_evenement.pdf");
+          });
+      } else {
+        alert(
+          "Les informations sont manquantes. Assurez-vous que les données ont été correctement transmises."
+        );
+      }
+    </script>
+  </body>
+</html>

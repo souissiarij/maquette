@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Génération des Comptes Membres</title>
+
+    <!-- CSS Files -->
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="assets/css/main.css" rel="stylesheet" />
+
+    <!-- jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  </head>
+
+  <body>
+    <header id="header" class="header sticky-top">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a href="index.html" class="logo d-flex align-items-center me-auto">
+          <img class="imglogo" src="assets/img/logo.png" alt="" />
+        </a>
+      </div>
+    </header>
+
+    <section id="generate-accounts" class="section">
+      <div class="container section-title text-center">
+        <h2>Générer des Comptes Membres</h2>
+        <p>
+          Entrez les informations pour générer des comptes pour chaque membre
+        </p>
+      </div>
+
+      <div class="container">
+        <h4>Liste des Membres</h4>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Prénom</th>
+              <th>Nom</th>
+              <th>Club</th>
+              <th>user name</th>
+              <th>Mot de Passe</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Jean</td>
+              <td>Dupont</td>
+              <td>Robotique</td>
+              <td>
+                <input
+                  type="text"
+                  id="email-jean"
+                  class="form-control"
+                  placeholder="user name"
+                />
+              </td>
+              <td>
+                <input
+                  type="password"
+                  id="password-jean"
+                  class="form-control"
+                  placeholder="Mot de Passe"
+                />
+              </td>
+              <td>
+                <button
+                  class="btn btn-success"
+                  onclick="generateAccount('jean')"
+                >
+                  Générer
+                </button>
+              </td>
+            </tr>
+            <!-- Autres membres à ajouter -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <script>
+      function generateAccount(member) {
+        const email = document.getElementById("email-" + member).value;
+        const password = document.getElementById("password-" + member).value;
+        if (email && password) {
+          alert(
+            "Compte généré pour " +
+              member +
+              " avec user name: " +
+              email +
+              " et mot de passe: " +
+              password
+          );
+          // Ici, tu peux envoyer les informations vers un serveur ou les enregistrer dans un fichier.
+        } else {
+          alert("Veuillez entrer un email et un mot de passe valides.");
+        }
+      }
+    </script>
+  </body>
+</html>
