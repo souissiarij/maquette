@@ -4,33 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Partenariats</title>
+    
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body>
 
-<header class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand p-3" href="#">CLUBSPHERE - Admin</a>
+<header class="navbar navbar-dark p-3 d-flex align-items-center" style="background-color: #34495e;">
+    <a href="index.html">
+        <img src="assets/img/logo.png" alt="Logo" height="40">
+    </a>
 </header>
 
 <div class="d-flex">
     <!-- Sidebar -->
     <nav class="bg-light border-right p-3" style="width: 250px; height: 100vh;">
         <ul class="nav flex-column">
-            <li class="nav-item"><a class="nav-link" href="admin.html">📊 Tableau de Bord</a></li>
-            <li class="nav-item"><a class="nav-link" href="events.html">📅 Événements</a></li>
+            <li class="nav-item"><a class="nav-link active" href="admin.html">📊 Tableau de Bord</a></li>
+            <li class="nav-item"><a class="nav-link" href="even.html">📅 Événements</a></li>
+  
+            <li class="nav-item"><a class="nav-link" href="events.html">📋 Demandes</a></li>
             <li class="nav-item"><a class="nav-link" href="finances.html">💰 Financements</a></li>
-            <li class="nav-item"><a class="nav-link active" href="partners.html">🤝 Partenariats</a></li>
+            <li class="nav-item"><a class="nav-link" href="partners.html">🤝 Partenariats</a></li>
             <li class="nav-item"><a class="nav-link" href="Membres.html">👥 Membres</a></li>
             <li class="nav-item"><a class="nav-link" href="reports.html">📑 Rapports</a></li>
+            <li class="nav-item"><a class="nav-link" href="registrations.html">📝 Suivi des Inscriptions</a></li>
         </ul>
     </nav>
 
-    <!-- Contenu Principal -->
+    <!-- Main Content -->
     <main class="container mt-4">
         <h2>🤝 Partenariats</h2>
 
-        <!-- Liste des Partenaires -->
+        <!-- Partner List -->
         <div class="card">
             <div class="card-header">
                 <h4>Liste des Partenaires</h4>
@@ -72,7 +87,7 @@
             </div>
         </div>
 
-        <!-- Ajouter ou Modifier un Partenaire -->
+        <!-- Add or Edit Partner -->
         <div class="card mt-4">
             <div class="card-header">
                 <h4 id="formTitle">Ajouter un Nouveau Partenaire</h4>

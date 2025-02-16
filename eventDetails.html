@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails de l'Événement</title>
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- Script pour les graphiques -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+     <!-- Favicons -->
+     <link href="assets/img/favicon.png" rel="icon">
+ 
+     <!-- Fonts -->
+     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+     
+     <!-- Vendor CSS Files -->
+     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+     <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+     <link href="assets/css/main.css" rel="stylesheet">
+     <link href="assets/css/style.css" rel="stylesheet">
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+
+
+          body {
+            background-color: #f4f6f9;
+        }
+        .navbar {
+            background-color: #34495e;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .d-flex {
+            width: 100%;
+            display: flex;
+        }
+
+        .sidebar {
+            display: none; /* Supprime la barre latérale bleue */
+        }
+
+        main.container {
+            width: 100%;
+            padding: 20px;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, rgba(106, 17, 203, 0.8), rgba(37, 117, 252, 0.8));
+            color: white;
+            padding: 50px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .event-details-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .event-details {
+            max-width: 800px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar navbar-dark p-3 d-flex align-items-center">
+        <a href="index.html">
+            <img src="assets/img/logo.png" alt="Logo" height="40">
+        </a>
+    </header>
+
+    <div class="d-flex">
+        <nav class="bg-light border-right p-3" style="width: 250px; height: 100vh;">
+            <ul class="nav flex-column">
+                <li class="nav-item"><a class="nav-link active" href="admin.html">📊 Tableau de Bord</a></li>
+                <li class="nav-item"><a class="nav-link" href="even.html">📅 Événements</a></li>
+      
+                <li class="nav-item"><a class="nav-link" href="events.html">📋 Demandes</a></li>
+                <li class="nav-item"><a class="nav-link" href="finances.html">💰 Financements</a></li>
+                <li class="nav-item"><a class="nav-link" href="partners.html">🤝 Partenariats</a></li>
+                <li class="nav-item"><a class="nav-link" href="Membres.html">👥 Membres</a></li>
+                <li class="nav-item"><a class="nav-link" href="reports.html">📑 Rapports</a></li>
+                <li class="nav-item"><a class="nav-link" href="registrations.html">📝 Suivi des Inscriptions</a></li>
+            </ul>
+        </nav>
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 id="eventName">Forum D'entreprise </h1>
+            <p id="eventType"> Rejoignez-nous ce mois d'avril</p>
+            <div class="countdown-timer">
+                <div>
+                    <span id="days">00</span>
+                    <small>Jours</small>
+                </div>
+                <div>
+                    <span id="hours">19</span>
+                    <small>Heures</small>
+                </div>
+                <div>
+                    <span id="minutes">07</span>
+                    <small>Minutes</small>
+                </div>
+                <div>
+                    <span id="seconds">00</span>
+                    <small>Secondes</small>
+                </div>
+            </div>
+            <div class="cta-btn">
+                <a href="#join" id="joinButton">Rejoindre</a>
+            </div>
+        </section>
+
+        <!-- Détails de l'Événement -->
+        <div class="event-details-container">
+            <div class="event-details">
+                <h3>À propos de l'événement</h3>
+                <p id="eventDescription">Bien que les temps soient incertains, une chose reste vraie. Il y a une puissance simple dans les gens qui se rassemblent. 40 000 personnes se connecteront en ligne à Collision.</p>
+                <div class="event-info">
+                    <strong>Date de début :</strong> <span id="eventStartDate">Avril 2023</span><br>
+                    <strong>Date de fin :</strong> <span id="eventEndDate">Avril 2023</span><br>
+                    <strong>Comité :</strong> <span id="committeeType">Communauté Tech</span><br>
+                    <strong>Appel à Candidature :</strong> <span id="roleCall">Ouvert</span>
+                </div>
+            </div>
+            <div class="event-image">
+                <img src="fa.jpg" alt="Photo de l'événement" id="eventImage">
+            </div>
+        </div>
+    </main>
+</body>
+</html>

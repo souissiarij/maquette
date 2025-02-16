@@ -4,117 +4,188 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Événements</title>
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <style>
-        .availability {
-            font-weight: bold;
+        body {
+            background-color: #f4f6f9;
         }
-        .available {
-            color: green;
+        .navbar {
+            background-color: #34495e;
         }
-        .unavailable {
-            color: red;
+        .navbar a {
+            color: white;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .chart-container {
+            width: 100%;
+            max-width: 500px;
+            margin: auto;
+        }
+        .table th, .table td {
+            text-align: center;
+        }
+        .navbar a:hover {
+            color: #ecf0f1;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
         }
     </style>
 </head>
 <body>
-
-<header class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand p-3" href="admin.html">Retour au Tableau de Bord</a>
+<header class="navbar navbar-dark p-3 d-flex align-items-center">
+    <a href="index.html">
+        <img src="assets/img/logo.png" alt="Logo" height="40">
+    </a>
 </header>
 
-<div class="container mt-4">
-    <h2>📅 Gestion des Événements</h2>
+<div class="d-flex">
+    <nav class="bg-light border-right p-3" style="width: 250px; height: 100vh;">
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link active" href="admin.html">📊 Tableau de Bord</a></li>
+            <li class="nav-item"><a class="nav-link" href="even.html">📅 Événements</a></li>
+            <li class="nav-item"><a class="nav-link" href="events.html">📋 Demandes</a></li>
+            <li class="nav-item"><a class="nav-link" href="finances.html">💰 Financements</a></li>
+            <li class="nav-item"><a class="nav-link" href="partners.html">🤝 Partenariats</a></li>
+            <li class="nav-item"><a class="nav-link" href="Membres.html">👥 Membres</a></li>
+            <li class="nav-item"><a class="nav-link" href="reports.html">📑 Rapports</a></li>
+            <li class="nav-item"><a class="nav-link" href="registrations.html">📝 Suivi des Inscriptions</a></li>
+        </ul>
+    </nav>
 
-    <!-- Consultation de la disponibilité de la salle -->
-    <h4>Vérification de la disponibilité de la salle</h4>
-    <div class="mb-3">
-        <label for="eventRoom" class="form-label">Sélectionner une salle</label>
-        <select class="form-select" id="eventRoom" required>
-            <option value="">Sélectionner une salle</option>
-            <option value="Amphi A">Amphithéâtre A</option>
-            <option value="Amphi B">Amphithéâtre B</option>
-            <option value="Salle 101">Salle 101</option>
-            <option value="Salle 102">Salle 102</option>
-        </select>
-        <button type="button" class="btn btn-info mt-2" id="checkAvailabilityBtn">Vérifier Disponibilité</button>
-        <div id="roomStatus" class="mt-2"></div>
-    </div>
-
-    <!-- Demande de l'événement reçue -->
-    <h4>Demande de l'Événement</h4>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Événement</th>
-                <th>Date</th>
-                <th>Local</th>
-                <th>Matériel</th>
-                <th>Statut</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Conférence Robotique</td>
-                <td>20 Février 2025</td>
-                <td>Amphi A</td>
-                <td>Projecteur, Multiprise</td>
-                <td><span class="badge bg-warning">En attente</span></td>
-                <td>
-                    <button class="btn btn-success btn-sm" onclick="approuverDemande()">✔ Approuver</button>
-                    <button class="btn btn-danger btn-sm" onclick="refuserDemande()">✖ Refuser</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <main class="container mt-4">
+        <h2>📅 Gestion des Événements</h2>
+        <div class="card">
+            <h4>Liste des demandes Événements</h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Événement</th>
+                        <th>Date</th>
+                        <th>Local</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Première demande (avec action de vérification et approbation/refus) -->
+                    <tr>
+                        <td>Conférence Robotique</td>
+                        <td>20 Février 2025</td>
+                        <td>Amphi A</td>
+                        <td><span class="badge bg-warning">En attente</span></td>
+                        <td>
+                            <div class="btn-group">
+                                <button class="btn btn-info btn-sm" onclick="verifierDisponibilite('Amphi A')">Vérifier Disponibilité</button>
+                                <button class="btn btn-success btn-sm" id="approuver-btn-1" style="display:none" onclick="approuverDemande('Amphi A', 1)">Approuver</button>
+                                <button class="btn btn-danger btn-sm" id="refuser-btn-1" style="display:none" onclick="refuserDemande('Amphi A', 1)">Refuser</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Deuxième demande (avec un local réservé) -->
+                    <tr>
+                        <td>Atelier d'Intelligence Artificielle</td>
+                        <td>25 Février 2025</td>
+                        <td>Amphi B</td>
+                        <td><span class="badge bg-warning">En attente</span></td>
+                        <td>
+                            <div class="btn-group">
+                                <button class="btn btn-info btn-sm" onclick="verifierDisponibilite('Amphi B')">Vérifier Disponibilité</button>
+                                <button class="btn btn-success btn-sm" id="approuver-btn-2" style="display:none" onclick="approuverDemande('Amphi B', 2)">Approuver</button>
+                                <button class="btn btn-danger btn-sm" id="refuser-btn-2" style="display:none" onclick="refuserDemande('Amphi B', 2)">Refuser</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
 </div>
 
 <script>
-    // Liste simulée de salles réservées
-    const reservedRooms = {
-        'Amphi A': ['20 Février 2025'],
-        'Amphi B': ['18 Février 2025'],
-        'Salle 101': [],
-        'Salle 102': []
-    };
+    // Liste des locaux disponibles et réservés
+    const locauxDisponibles = ['Amphi A', 'Salle 1', 'Salle 2']; // Liste des locaux disponibles
+    const locauxReserves = ['Amphi B']; // Liste des locaux réservés
 
-    // Fonction pour vérifier la disponibilité de la salle
-    document.getElementById('checkAvailabilityBtn').addEventListener('click', function () {
-        const selectedRoom = document.getElementById('eventRoom').value;
-        const eventDate = '20 Février 2025'; // La date peut être prise dynamiquement du formulaire de demande
-
-        if (selectedRoom) {
-            checkRoomAvailability(selectedRoom, eventDate);
+    // Fonction pour vérifier la disponibilité du local
+    function verifierDisponibilite(local) {
+        if (locauxDisponibles.includes(local)) {
+            // Si le local est disponible, afficher les boutons Approuver et Refuser
+            alert("Le local est libre. Vous pouvez approuver ou refuser.");
+            if (local === 'Amphi A') {
+                document.getElementById('approuver-btn-1').style.display = 'inline-block';
+                document.getElementById('refuser-btn-1').style.display = 'inline-block';
+            } else if (local === 'Amphi B') {
+                document.getElementById('approuver-btn-2').style.display = 'inline-block';
+                document.getElementById('refuser-btn-2').style.display = 'inline-block';
+            }
         } else {
-            alert("Veuillez sélectionner une salle.");
-        }
-    });
-
-    // Vérifier la disponibilité de la salle
-    function checkRoomAvailability(room, date) {
-        const roomStatus = document.getElementById('roomStatus');
-        if (reservedRooms[room].includes(date)) {
-            roomStatus.innerHTML = `<span class="availability unavailable">${room} - Indisponible pour cette date</span>`;
-        } else {
-            roomStatus.innerHTML = `<span class="availability available">${room} - Disponible</span>`;
+            // Si le local est réservé, seulement afficher le bouton Refuser
+            alert("Le local est déjà réservé. Vous pouvez refuser cette demande.");
+            if (local === 'Amphi A') {
+                document.getElementById('approuver-btn-1').style.display = 'none';
+                document.getElementById('refuser-btn-1').style.display = 'inline-block';
+            } else if (local === 'Amphi B') {
+                document.getElementById('approuver-btn-2').style.display = 'none';
+                document.getElementById('refuser-btn-2').style.display = 'inline-block';
+            }
         }
     }
 
     // Fonction pour approuver la demande
-    function approuverDemande() {
-        alert("La demande a été approuvée !");
-        // Mettre à jour le statut dans la base de données ou sur le serveur
-        window.location.href = "confirmation.html"; // Redirection vers une page de confirmation
+    function approuverDemande(local, demandeId) {
+        alert("La demande pour " + local + " a été approuvée !");
+        // Télécharger le PDF après approbation
+        const eventDetails = {
+            evenement: "Événement " + local,
+            date: "Date de l'événement",
+            local: local,
+            statut: "Approuvé"
+        };
+        downloadPDF(eventDetails);
     }
 
     // Fonction pour refuser la demande
-    function refuserDemande() {
-        alert("La demande a été refusée !");
-        // Mettre à jour le statut dans la base de données ou sur le serveur
-        window.location.href = "confirmation.html"; // Redirection vers une page de confirmation
+    function refuserDemande(local, demandeId) {
+        alert("La demande pour " + local + " a été refusée !");
+    }
+
+    // Fonction pour télécharger un PDF avec les détails de l'événement
+    function downloadPDF(eventDetails) {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        doc.text("Détails de l'événement", 10, 10);
+        doc.text("Événement : " + eventDetails.evenement, 10, 20);
+        doc.text("Date : " + eventDetails.date, 10, 30);
+        doc.text("Local : " + eventDetails.local, 10, 40);
+        doc.text("Statut : " + eventDetails.statut, 10, 50);
+
+        // Télécharger le fichier PDF
+        doc.save('evenement_' + eventDetails.local + '_details.pdf');
     }
 </script>
+
+<!-- Inclure jsPDF pour le téléchargement du PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 </body>
 </html>

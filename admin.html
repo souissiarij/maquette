@@ -47,7 +47,9 @@
     <nav class="bg-light border-right p-3" style="width: 250px; height: 100vh;">
       <ul class="nav flex-column">
           <li class="nav-item"><a class="nav-link active" href="admin.html">📊 Tableau de Bord</a></li>
-          <li class="nav-item"><a class="nav-link" href="events.html">📅 Événements</a></li>
+          <li class="nav-item"><a class="nav-link" href="even.html">📅 Événements</a></li>
+
+          <li class="nav-item"><a class="nav-link" href="events.html">📋 Demandes</a></li>
           <li class="nav-item"><a class="nav-link" href="finances.html">💰 Financements</a></li>
           <li class="nav-item"><a class="nav-link" href="partners.html">🤝 Partenariats</a></li>
           <li class="nav-item"><a class="nav-link" href="Membres.html">👥 Membres</a></li>
@@ -117,7 +119,7 @@
     new Chart(ctx3, {
         type: 'pie',
         data: {
-            labels: ['Étudiants', 'Professeurs', 'Externes'],
+            labels: ['Membre Participant', 'Membre Junior/Senio', 'Externes'],
             datasets: [{
                 data: [45, 15, 10],
                 backgroundColor: ['#9b59b6', '#34495e', '#1abc9c']

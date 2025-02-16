@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Lancer un Événement</title>
+    
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #f4f6f9;
+        }
+        .navbar {
+            background-color: #34495e;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .chart-container {
+            width: 100%;
+            max-width: 500px;
+            margin: auto;
+        }
+        .form-label {
+            font-weight: 500;
+        }
+        .table th, .table td {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<header class="navbar navbar-dark p-3 d-flex align-items-center">
+    <a href="index.html">
+        <img src="assets/img/logo.png" alt="Logo" height="40">
+    </a>
+</header>
+<div class="d-flex">
+    <nav class="bg-light border-right p-3" style="width: 250px; height: 100vh;">
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link active" href="admin.html">📊 Tableau de Bord</a></li>
+            <li class="nav-item"><a class="nav-link" href="even.html">📅 Événements</a></li>
+            <li class="nav-item"><a class="nav-link" href="events.html">📋 Demandes</a></li>
+            <li class="nav-item"><a class="nav-link" href="finances.html">💰 Financements</a></li>
+            <li class="nav-item"><a class="nav-link" href="partners.html">🤝 Partenariats</a></li>
+            <li class="nav-item"><a class="nav-link" href="Membres.html">👥 Membres</a></li>
+            <li class="nav-item"><a class="nav-link" href="reports.html">📑 Rapports</a></li>
+            <li class="nav-item"><a class="nav-link" href="registrations.html">📝 Suivi des Inscriptions</a></li>
+        </ul>
+    </nav>
+    
+    <main class="container mt-4">
+        <h2>Lancer un Événement</h2>
+
+        <!-- Formulaire de lancement d'un événement -->
+        <div class="card bg-light mt-4">
+            <h4>Formulaire de Lancement</h4>
+            <form id="eventLaunchForm">
+                <!-- Sélection de l'événement -->
+                <div class="mb-3">
+                    <label for="eventType" class="form-label">Type d'Événement</label>
+                    <select class="form-control" id="eventType" required>
+                        <option value="Forum">Forum</option>
+                        <option value="Hackathon">Hackathon</option>
+                        <option value="EnicARobotos">EnicARobotos</option>
+                        <option value="Fawanis">Fawanis</option>
+                        <option value="Autre">Autre</option>
+                    </select>
+                </div>
+
+                <!-- Nom de l'événement -->
+                <div class="mb-3">
+                    <label for="eventName" class="form-label">Nom de l'Événement</label>
+                    <input type="text" class="form-control" id="eventName" required>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-3">
+                    <label for="eventDescription" class="form-label">Description</label>
+                    <textarea class="form-control" id="eventDescription" rows="4" required></textarea>
+                </div>
+
+                <!-- Dates de l'événement -->
+                <div class="mb-3">
+                    <label for="eventStartDate" class="form-label">Date de début</label>
+                    <input type="date" class="form-control" id="eventStartDate" required>
+                </div>
+                <div class="mb-3">
+                    <label for="eventEndDate" class="form-label">Date de fin</label>
+                    <input type="date" class="form-control" id="eventEndDate" required>
+                </div>
+
+                <!-- Appel à Candidature -->
+                <div class="mb-3">
+                    <label for="roleCall" class="form-label">Appel à Candidature</label>
+                    <textarea class="form-control" id="roleCall" rows="3" placeholder="Ex: Rejoindre le comité organisateur, comité média, etc." required></textarea>
+                </div>
+
+                <!-- Sélection des types de comités -->
+                <div class="mb-3">
+                    <label for="committeeType" class="form-label">Type de Comité</label>
+                    <select class="form-control" id="committeeType" required>
+                        <option value="Comité Organisateur">Comité Organisateur</option>
+                        <option value="Comité Média">Comité Média</option>
+                        <option value="Comité Logistique">Comité Logistique</option>
+                        <option value="Comité Technique">Comité Technique</option>
+                        <option value="Autre">Autre</option>
+                    </select>
+                </div>
+
+                <!-- Soumettre -->
+                <button type="submit" class="btn btn-primary">Lancer l'Événement</button>
+            </form>
+        </div>
+
+        <hr>
+
+        <!-- Liste des événements en cours -->
+        <h4>Événements en Cours</h4>
+        <table class="table table-bordered mt-4">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nom de l'Événement</th>
+                    <th>Type</th>
+                    <th>Date de Début</th>
+                    <th>État</th>
+                    <th>Appel à Candidature</th>
+                    <th>Type de Comité</th>
+                </tr>
+            </thead>
+            <tbody id="eventList">
+                <!-- Liste dynamique des événements ici -->
+            </tbody>
+        </table>
+    </main>
+</div>
+
+<script>
+    // Gestion de l'ajout d'un événement
+    document.getElementById("eventLaunchForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Empêcher l'envoi du formulaire par défaut
+
+        // Récupérer les valeurs du formulaire
+        const eventType = document.getElementById("eventType").value;
+        const eventName = document.getElementById("eventName").value;
+        const eventDescription = document.getElementById("eventDescription").value;
+        const eventStartDate = document.getElementById("eventStartDate").value;
+        const eventEndDate = document.getElementById("eventEndDate").value;
+        const roleCall = document.getElementById("roleCall").value;
+        const committeeType = document.getElementById("committeeType").value;
+
+        // Créer un nouvel événement
+        const newEvent = {
+            name: eventName,
+            type: eventType,
+            startDate: eventStartDate,
+            endDate: eventEndDate,
+            status: "Planifié", // Statut par défaut
+            roleCall: roleCall,
+            committeeType: committeeType  // Ajouter le type de comité
+        };
+
+        // Ajouter l'événement à la liste
+        const eventList = document.getElementById("eventList");
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>#</td>
+            <td>${newEvent.name}</td>
+            <td>${newEvent.type}</td>
+            <td>${newEvent.startDate}</td>
+            <td>${newEvent.status}</td>
+            <td>${newEvent.roleCall}</td>
+            <td>${newEvent.committeeType}</td>  <!-- Afficher le type de comité -->
+        `;
+        
+        eventList.appendChild(row);
+
+        // Réinitialiser le formulaire
+        document.getElementById("eventLaunchForm").reset();
+
+        // Optionnel : Afficher un message de succès
+        alert("Événement lancé avec succès !");
+    });
+
+    document.getElementById("eventLaunchForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Empêcher l'envoi du formulaire par défaut
+
+        // Récupérer les valeurs du formulaire
+        const eventType = document.getElementById("eventType").value;
+        const eventName = document.getElementById("eventName").value;
+        const eventDescription = document.getElementById("eventDescription").value;
+        const eventStartDate = document.getElementById("eventStartDate").value;
+        const eventEndDate = document.getElementById("eventEndDate").value;
+        const roleCall = document.getElementById("roleCall").value;
+        const committeeType = document.getElementById("committeeType").value;
+
+        // Créer un nouvel événement
+        const newEvent = {
+            name: eventName,
+            type: eventType,
+            startDate: eventStartDate,
+            endDate: eventEndDate,
+            status: "Planifié", // Statut par défaut
+            roleCall: roleCall,
+            committeeType: committeeType  // Ajouter le type de comité
+        };
+
+        // Stocker l'événement dans localStorage
+        localStorage.setItem('eventDetails', JSON.stringify(newEvent));
+
+        // Rediriger vers la page de détails
+        window.location.href = "eventDetails.html";
+    });
+</script>
+</body>
+</html>
