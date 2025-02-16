@@ -359,7 +359,67 @@ Grâce à une interface intuitive, les responsables de clubs peuvent soumettre e
         });
     </script>
 
-   
+<section id="forum-enicarthage" class="appointment section">
+  <div class="container section-title" data-aos="fade-up">
+      <h2>Forum ENICarthage 9.0 - Appel à Candidature</h2>
+      <p>Les étudiants souhaitant intégrer l'organisation peuvent remplir le formulaire ci-dessous.</p>
+  </div>
+  
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <form action="#" method="post" role="form" class="php-email-form">
+          <div class="row">
+              <div class="col-md-4 form-group">
+                  <input type="text" name="nom" class="form-control" id="nom" placeholder="Nom" required>
+              </div>
+              <div class="col-md-4 form-group mt-3 mt-md-0">
+                  <input type="text" name="prenom" class="form-control" id="prenom" placeholder="Prénom" required>
+              </div>
+              <div class="col-md-4 form-group mt-3 mt-md-0">
+                  <input type="email" name="email" class="form-control" id="email" placeholder="Email" required>
+              </div>
+          </div>
+          
+          <div class="row">
+              <div class="col-md-6 form-group mt-3">
+                  <select name="niveau" id="niveau" class="form-select" required>
+                      <option value="">Niveau d'études</option>
+                      <option value="1A">1ère année</option>
+                      <option value="2A">2ème année</option>
+                      <option value="3A">3ème année</option>
+                  </select>
+              </div>
+              <div class="col-md-6 form-group mt-3">
+                  <select name="comite" id="comite" class="form-select" required>
+                      <option value="">Choisissez un comité</option>
+                      <option value="logistique">Logistique</option>
+                      <option value="communication">Communication</option>
+                      <option value="sponsoring">Sponsoring</option>
+                      <option value="organisation">Organisation</option>
+                  </select>
+              </div>
+          </div>
+          
+          <div class="form-group mt-3">
+              <fieldset>
+                  <legend>Participation :</legend>
+                  <input type="radio" id="membre" name="participation" value="membre" required>
+                  <label for="membre">Membre</label>
+                  <input type="radio" id="responsable" name="participation" value="responsable" required>
+                  <label for="responsable">Responsable comité</label>
+              </fieldset>
+          </div>
+          
+          <div class="form-group mt-3">
+              <textarea class="form-control" name="motivation" rows="5" placeholder="Motivation" required></textarea>
+          </div>
+          
+          <div class="text-center mt-3">
+              <button type="submit" class="btn btn-primary">Envoyer</button>
+          </div>
+      </form>
+  </div>
+</section>
+
 
    
 

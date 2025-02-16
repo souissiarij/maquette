@@ -430,58 +430,83 @@
 
 
 
-    <section id="gestion-demandes" class="tableau section">
-        <div class="container section-title" data-aos="fade-up">
-          <h2>Gestion des demandes d'inscription</h2>
-        </div>
-      
-        <div class="container" data-aos="fade-up">
-          <table class="table table-striped">
-            <thead>
+<section id="suivi-entretiens" class="tableau section">
+  <div class="container section-title" data-aos="fade-up">
+      <h2>Suivi des entretiens</h2>
+  </div>
+
+  <div class="container" data-aos="fade-up">
+      <table class="table table-striped" id="entretienTable">
+          <thead>
               <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Email</th>
-                <th>Numéro de téléphone</th>
-                <th>Traitée</th>
+                  <th>Nom du candidat</th>
+                  <th>Personne en charge</th>
+                  <th>Temps de l'entretien</th>
+                  <th>Remarques</th>
+                  <th>Actions</th>
               </tr>
-            </thead>
-            <tbody>
+          </thead>
+          <tbody>
               <tr>
-                <td>Dupont</td>
-                <td>Jean</td>
-                <td>jean.dupont@example.com</td>
-                <td>+1 123 456 789</td>
-                <td><input type="checkbox" onclick="markAsProcessed(this, this.parentElement.parentElement)" /></td>
-              </tr>
-              <tr>
-                <td>Martin</td>
-                <td>Claire</td>
-                <td>claire.martin@example.com</td>
-                <td>+1 987 654 321</td>
-                <td><input type="checkbox" onclick="markAsProcessed(this, this.parentElement.parentElement)" /></td>
+                  <td>Dupont Jean</td>
+                  <td>Mr. Martin</td>
+                  <td>10/03/2025 - 10:00 à 10:30</td>
+                  <td><input type="text" class="form-control" placeholder="Remarques"></td>
+                  <td><button onclick="deleteRow(this)">Supprimer</button></td>
               </tr>
               <tr>
-                <td>Bernard</td>
-                <td>Luc</td>
-                <td>luc.bernard@example.com</td>
-                <td>+1 456 789 012</td>
-                <td><input type="checkbox" onclick="markAsProcessed(this, this.parentElement.parentElement)" /></td>
+                  <td>Claire Bernard</td>
+                  <td>Mme. Lefevre</td>
+                  <td>10/03/2025 - 10:30 à 11:00</td>
+                  <td><input type="text" class="form-control" placeholder="Remarques"></td>
+                  <td><button onclick="deleteRow(this)">Supprimer</button></td>
               </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-      
-      <script>
-        function markAsProcessed(checkbox, row) {
-          if (checkbox.checked) {
-            row.style.textDecoration = 'line-through'; // Barrer la ligne
-          } else {
-            row.style.textDecoration = 'none'; // Enlever le barré
-          }
-        }
-      </script>
+              <tr>
+                  <td>Luc Moreau</td>
+                  <td>Mr. Dupuis</td>
+                  <td>10/03/2025 - 11:00 à 11:30</td>
+                  <td><input type="text" class="form-control" placeholder="Remarques"></td>
+                  <td><button onclick="deleteRow(this)">Supprimer</button></td>
+              </tr>
+          </tbody>
+      </table>
+      <button onclick="addRow()" class="btn btn-primary">Ajouter une ligne</button>
+  </div>
+</section>
+
+<script>
+  function addRow() {
+      let table = document.getElementById("entretienTable").getElementsByTagName('tbody')[0];
+      let newRow = table.insertRow();
+      newRow.innerHTML = `
+          <td><input type="text" class="form-control" placeholder="Nom du candidat"></td>
+          <td><input type="text" class="form-control" placeholder="Personne en charge"></td>
+          <td><input type="text" class="form-control" placeholder="Temps de l'entretien"></td>
+          <td><input type="text" class="form-control" placeholder="Remarques"></td>
+          <td><button onclick="deleteRow(this)">Supprimer</button></td>
+      `;
+  }
+
+  function deleteRow(button) {
+      button.parentElement.parentElement.remove();
+  }
+</script>
+
+
+
+<script>
+  function markAsProcessed(checkbox, row) {
+      if (checkbox.checked) {
+          row.style.textDecoration = 'line-through';
+      } else {
+          row.style.textDecoration = 'none';
+      }
+  }
+  
+  function deleteRow(button) {
+      button.parentElement.parentElement.remove();
+  }
+</script>
 
 
 
@@ -586,6 +611,89 @@
   </script>
   
 
+  <section id="gestion-club" class="section">
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Gestion du Club</h2>
+    </div>
+
+    <div class="container" data-aos="fade-up">
+        <!-- Section Ajouter un Événement -->
+        <h3>Ajouter un Événement</h3>
+        <form id="eventForm">
+            <div class="mb-3">
+                <label for="eventTitle" class="form-label">Titre de l'événement</label>
+                <input type="text" class="form-control" id="eventTitle" required>
+            </div>
+            <div class="mb-3">
+                <label for="eventDate" class="form-label">Date</label>
+                <input type="date" class="form-control" id="eventDate" required>
+            </div>
+            <div class="mb-3">
+                <label for="eventDescription" class="form-label">Description</label>
+                <textarea class="form-control" id="eventDescription" rows="3" required></textarea>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="addEvent()">Ajouter</button>
+        </form>
+
+        <hr>
+
+        <!-- Section Ajouter des Images -->
+        <h3>Ajouter des Images</h3>
+        <form id="imageUploadForm">
+            <div class="mb-3">
+                <label for="imageUpload" class="form-label">Sélectionner des images</label>
+                <input type="file" class="form-control" id="imageUpload" multiple accept="image/*">
+            </div>
+            <button type="button" class="btn btn-success" onclick="uploadImages()">Télécharger</button>
+        </form>
+
+        <hr>
+
+        <!-- Section Ouvrir/Fermer les Inscriptions -->
+        <h3>Gérer les Inscriptions</h3>
+        <button id="toggleInscription" class="btn btn-warning" onclick="toggleInscription()">Ouvrir les Inscriptions</button>
+
+        <p id="inscriptionStatus" class="mt-2">Les inscriptions sont <strong>fermées</strong>.</p>
+    </div>
+</section>
+
+<script>
+    function addEvent() {
+        let title = document.getElementById("eventTitle").value;
+        let date = document.getElementById("eventDate").value;
+        let description = document.getElementById("eventDescription").value;
+
+        if (title && date && description) {
+            alert("Événement ajouté : " + title);
+            document.getElementById("eventForm").reset();
+        } else {
+            alert("Veuillez remplir tous les champs.");
+        }
+    }
+
+    function uploadImages() {
+        let files = document.getElementById("imageUpload").files;
+        if (files.length > 0) {
+            alert(files.length + " images téléchargées !");
+            document.getElementById("imageUploadForm").reset();
+        } else {
+            alert("Aucune image sélectionnée.");
+        }
+    }
+
+    function toggleInscription() {
+        let button = document.getElementById("toggleInscription");
+        let statusText = document.getElementById("inscriptionStatus");
+
+        if (button.innerText === "Ouvrir les Inscriptions") {
+            button.innerText = "Fermer les Inscriptions";
+            statusText.innerHTML = "Les inscriptions sont <strong>ouvertes</strong>.";
+        } else {
+            button.innerText = "Ouvrir les Inscriptions";
+            statusText.innerHTML = "Les inscriptions sont <strong>fermées</strong>.";
+        }
+    }
+</script>
 
 
 
