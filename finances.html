@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Financements</title>
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand p-3" href="admin.html">Retour au Tableau de Bord</a>
+</header>
+
+<div class="container mt-4">
+    <h2>💰 Gestion des Financements</h2>
+    
+    <!-- Filtrer par type d'événement -->
+    <div class="mb-3">
+        <label for="eventType" class="form-label">Filtrer par Type d'Événement</label>
+        <select class="form-select" id="eventType">
+            <option value="all">Tous</option>
+            <option value="school">Événements à l'école</option>
+            <option value="external">Événements à l'extérieur</option>
+        </select>
+    </div>
+
+    <!-- Table des financements -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Club</th>
+                <th>Montant Demandé</th>
+                <th>Type d'Événement</th>
+                <th>Justificatif</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="financeTable">
+            <!-- Ligne exemple pour événement interne -->
+            <tr class="school-event">
+                <td>Club Informatique</td>
+                <td>5,000 €</td>
+                <td>Événement à l'école</td>
+                <td><a href="justification.html" target="_blank">Voir</a></td>
+                <td><span class="badge bg-warning">En attente</span></td>
+                <td>
+                    <button class="btn btn-success" onclick="approuverDemande()">Approuver</button>
+                    <button class="btn btn-danger" onclick="refuserDemande()">Refuser</button>
+                </td>
+            </tr>
+            <!-- Ligne exemple pour événement externe -->
+            <tr class="external-event">
+                <td>Club Sportif</td>
+                <td>8,000 €</td>
+                <td>Événement à l'extérieur</td>
+                <td><a href="justification.html" target="_blank">Voir</a></td>
+                <td><span class="badge bg-warning">En attente</span></td>
+                <td>
+                    <button class="btn btn-success" onclick="approuverDemande()">Approuver</button>
+                    <button class="btn btn-danger" onclick="refuserDemande()">Refuser</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // Fonction pour approuver la demande
+    function approuverDemande() {
+        alert("Demande approuvée !");
+        window.location.href = "admin.html"; // Redirection vers la page d'accueil
+    }
+
+    // Fonction pour refuser la demande
+    function refuserDemande() {
+        alert("Demande refusée !");
+        window.location.href = "admin.html"; // Redirection vers la page d'accueil
+    }
+
+    // Fonction pour filtrer par type d'événement
+    document.getElementById('eventType').addEventListener('change', function () {
+        var eventType = this.value;
+        var rows = document.querySelectorAll('#financeTable tr');
+        
+        rows.forEach(function (row) {
+            if (eventType === 'all') {
+                row.style.display = '';
+            } else if (eventType === 'school' && row.classList.contains('school-event')) {
+                row.style.display = '';
+            } else if (eventType === 'external' && row.classList.contains('external-event')) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

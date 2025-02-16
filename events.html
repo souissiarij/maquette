@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Événements</title>
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .availability {
+            font-weight: bold;
+        }
+        .available {
+            color: green;
+        }
+        .unavailable {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<header class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand p-3" href="admin.html">Retour au Tableau de Bord</a>
+</header>
+
+<div class="container mt-4">
+    <h2>📅 Gestion des Événements</h2>
+
+    <!-- Consultation de la disponibilité de la salle -->
+    <h4>Vérification de la disponibilité de la salle</h4>
+    <div class="mb-3">
+        <label for="eventRoom" class="form-label">Sélectionner une salle</label>
+        <select class="form-select" id="eventRoom" required>
+            <option value="">Sélectionner une salle</option>
+            <option value="Amphi A">Amphithéâtre A</option>
+            <option value="Amphi B">Amphithéâtre B</option>
+            <option value="Salle 101">Salle 101</option>
+            <option value="Salle 102">Salle 102</option>
+        </select>
+        <button type="button" class="btn btn-info mt-2" id="checkAvailabilityBtn">Vérifier Disponibilité</button>
+        <div id="roomStatus" class="mt-2"></div>
+    </div>
+
+    <!-- Demande de l'événement reçue -->
+    <h4>Demande de l'Événement</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Événement</th>
+                <th>Date</th>
+                <th>Local</th>
+                <th>Matériel</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Conférence Robotique</td>
+                <td>20 Février 2025</td>
+                <td>Amphi A</td>
+                <td>Projecteur, Multiprise</td>
+                <td><span class="badge bg-warning">En attente</span></td>
+                <td>
+                    <button class="btn btn-success btn-sm" onclick="approuverDemande()">✔ Approuver</button>
+                    <button class="btn btn-danger btn-sm" onclick="refuserDemande()">✖ Refuser</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // Liste simulée de salles réservées
+    const reservedRooms = {
+        'Amphi A': ['20 Février 2025'],
+        'Amphi B': ['18 Février 2025'],
+        'Salle 101': [],
+        'Salle 102': []
+    };
+
+    // Fonction pour vérifier la disponibilité de la salle
+    document.getElementById('checkAvailabilityBtn').addEventListener('click', function () {
+        const selectedRoom = document.getElementById('eventRoom').value;
+        const eventDate = '20 Février 2025'; // La date peut être prise dynamiquement du formulaire de demande
+
+        if (selectedRoom) {
+            checkRoomAvailability(selectedRoom, eventDate);
+        } else {
+            alert("Veuillez sélectionner une salle.");
+        }
+    });
+
+    // Vérifier la disponibilité de la salle
+    function checkRoomAvailability(room, date) {
+        const roomStatus = document.getElementById('roomStatus');
+        if (reservedRooms[room].includes(date)) {
+            roomStatus.innerHTML = `<span class="availability unavailable">${room} - Indisponible pour cette date</span>`;
+        } else {
+            roomStatus.innerHTML = `<span class="availability available">${room} - Disponible</span>`;
+        }
+    }
+
+    // Fonction pour approuver la demande
+    function approuverDemande() {
+        alert("La demande a été approuvée !");
+        // Mettre à jour le statut dans la base de données ou sur le serveur
+        window.location.href = "confirmation.html"; // Redirection vers une page de confirmation
+    }
+
+    // Fonction pour refuser la demande
+    function refuserDemande() {
+        alert("La demande a été refusée !");
+        // Mettre à jour le statut dans la base de données ou sur le serveur
+        window.location.href = "confirmation.html"; // Redirection vers une page de confirmation
+    }
+</script>
+
+</body>
+</html>

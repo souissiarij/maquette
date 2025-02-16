@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Membres</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Conteneur Principal -->
+<div class="container mt-4">
+    <!-- Card pour la gestion des membres -->
+    <div class="card">
+        <div class="card-header">
+            <h4>Gestion des Membres - Nouveaux Membres Recrutés</h4>
+        </div>
+        <div class="card-body">
+            <!-- Tableau des membres -->
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Date d'Inscription</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Exemple de membre -->
+                    <tr>
+                        <td>1</td>
+                        <td>Marie Dupont</td>
+                        <td>marie.dupont@example.com</td>
+                        <td>2025-02-14</td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" onclick="assignCredentials(1)">Assigner Identifiants</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Paul Durand</td>
+                        <td>paul.durand@example.com</td>
+                        <td>2025-02-15</td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" onclick="assignCredentials(2)">Assigner Identifiants</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal pour attribuer les identifiants -->
+    <div class="modal fade" id="assignCredentialsModal" tabindex="-1" aria-labelledby="assignCredentialsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="assignCredentialsModalLabel">Assigner Identifiants</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="assignForm">
+                        <div class="form-group">
+                            <label for="username">Nom d'utilisateur</label>
+                            <input type="text" class="form-control" id="username" placeholder="Nom d'utilisateur">
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="password">Mot de passe</label>
+                            <input type="password" class="form-control" id="password" placeholder="Mot de passe">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-success" onclick="saveCredentials()">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Inclusion de Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// Fonction pour ouvrir le modal d'attribution des identifiants
+function assignCredentials(memberId) {
+    // Afficher le modal pour saisir les identifiants
+    var modal = new bootstrap.Modal(document.getElementById('assignCredentialsModal'));
+    modal.show();
+    
+    // Optionnel: Pré-remplir le nom d'utilisateur et mot de passe (si nécessaire)
+    document.getElementById('username').value = ''; // Par exemple, tu pourrais générer un nom d'utilisateur unique
+    document.getElementById('password').value = '';
+}
+
+// Fonction pour sauvegarder les identifiants
+function saveCredentials() {
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+    
+    if (username && password) {
+        // Simuler l'enregistrement des identifiants
+        alert('Identifiants enregistrés pour ' + username);
+        
+        // Fermer le modal après enregistrement
+        var modal = bootstrap.Modal.getInstance(document.getElementById('assignCredentialsModal'));
+        modal.hide();
+    } else {
+        alert('Veuillez remplir tous les champs.');
+    }
+}
+</script>
+
+</body>
+</html>

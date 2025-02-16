@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Rapports</title>
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Bibliothèque pour les graphiques -->
+</head>
+<body>
+
+<header class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand p-3" href="#">CLUBSPHERE - Admin</a>
+</header>
+
+<div class="d-flex">
+    <!-- Sidebar -->
+    <nav class="bg-light border-right p-3" style="width: 250px; height: 100vh;">
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="index.html">📊 Tableau de Bord</a></li>
+            <li class="nav-item"><a class="nav-link" href="events.html">📅 Événements</a></li>
+            <li class="nav-item"><a class="nav-link" href="finances.html">💰 Financements</a></li>
+            <li class="nav-item"><a class="nav-link" href="partners.html">🤝 Partenariats</a></li>
+            <li class="nav-item"><a class="nav-link" href="Membres.html">🤝 Membres</a></li>
+            <li class="nav-item"><a class="nav-link active" href="reports.html">📑 Rapports</a></li>
+        </ul>
+    </nav>
+
+    <!-- Contenu Principal -->
+    <main class="container mt-4">
+        <h2>📑 Rapports de Performance</h2>
+
+        <!-- Rapport sur les événements -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>Rapport sur les Événements</h4>
+            </div>
+            <div class="card-body">
+                <canvas id="eventsChart"></canvas> <!-- Graphique des événements -->
+            </div>
+        </div>
+
+        <!-- Rapport sur la participation des membres -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>Rapport sur la Participation des Membres</h4>
+            </div>
+            <div class="card-body">
+                <canvas id="participationChart"></canvas> <!-- Graphique de participation des membres -->
+            </div>
+        </div>
+
+        <!-- Rapport sur les financements -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>Rapport sur les Financements</h4>
+            </div>
+            <div class="card-body">
+                <canvas id="financingChart"></canvas> <!-- Graphique des financements -->
+            </div>
+        </div>
+
+        <!-- Rapport détaillé des événements -->
+        <div class="card">
+            <div class="card-header">
+                <h4>Détails des Événements Réalisés</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nom de l'Événement</th>
+                            <th>Date</th>
+                            <th>Nombre de Participants</th>
+                            <th>Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Conférence Robotique</td>
+                            <td>20 Février 2025</td>
+                            <td>150</td>
+                            <td><span class="badge bg-success">Terminé</span></td>
+                        </tr>
+                        <tr>
+                            <td>Atelier Python</td>
+                            <td>22 Février 2025</td>
+                            <td>80</td>
+                            <td><span class="badge bg-warning">En cours</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+    // Données pour les graphiques
+    var eventsData = {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+            label: 'Nombre d\'événements réalisés',
+            data: [5, 10, 8, 12, 7, 9],
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+        }]
+    };
+
+    var participationData = {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+            label: 'Nombre de participants',
+            data: [150, 200, 180, 220, 190, 210],
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+        }]
+    };
+
+    var financingData = {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+            label: 'Montant des financements demandés',
+            data: [1000, 2000, 1500, 2500, 3000, 3500],
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+        }]
+    };
+
+    // Graphique des événements
+    var ctx1 = document.getElementById('eventsChart').getContext('2d');
+    new Chart(ctx1, {
+        type: 'bar',
+        data: eventsData,
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Graphique de la participation des membres
+    var ctx2 = document.getElementById('participationChart').getContext('2d');
+    new Chart(ctx2, {
+        type: 'line',
+        data: participationData,
+        options: {
+            responsive: true
+        }
+    });
+
+    // Graphique des financements
+    var ctx3 = document.getElementById('financingChart').getContext('2d');
+    new Chart(ctx3, {
+        type: 'line',
+        data: financingData,
+        options: {
+            responsive: true
+        }
+    });
+</script>
+
+</body>
+</html>

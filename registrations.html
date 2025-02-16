@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Suivi des Inscriptions</title>
+    
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f6f9;
+        }
+        .navbar {
+            background-color: #34495e;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<header class="navbar navbar-dark p-3 d-flex align-items-center">
+    <a href="index.html">
+        <img src="assets/img/logo.png" alt="Logo" height="40">
+    </a>
+</header>
+<div class="d-flex">
+    <nav class="bg-light border-right p-3" style="width: 250px; height: 100vh;">
+      <ul class="nav flex-column">
+          <li class="nav-item"><a class="nav-link" href="admin.html">📊 Tableau de Bord</a></li>
+          <li class="nav-item"><a class="nav-link" href="events.html">📅 Événements</a></li>
+          <li class="nav-item"><a class="nav-link" href="finances.html">💰 Financements</a></li>
+          <li class="nav-item"><a class="nav-link" href="partners.html">🤝 Partenariats</a></li>
+          <li class="nav-item"><a class="nav-link" href="Membres.html">👥 Membres</a></li>
+          <li class="nav-item"><a class="nav-link" href="reports.html">📑 Rapports</a></li>
+          <li class="nav-item"><a class="nav-link active" href="registrations.html">📝 Suivi des Inscriptions</a></li>
+      </ul>
+  </nav>
+  
+    <main class="container mt-4">
+        <h2>📝 Suivi des Inscriptions aux Événements</h2>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Événement</th>
+                                    <th>Nombre d'inscrits</th>
+                                    <th>Liste d'attente</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Soirée Gala</td>
+                                    <td>50</td>
+                                    <td>5</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm" onclick="envoyerRappel('Soirée Gala')">📧 Envoyer Rappel</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Conférence Tech</td>
+                                    <td>30</td>
+                                    <td>2</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm" onclick="envoyerRappel('Conférence Tech')">📧 Envoyer Rappel</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+    function envoyerRappel(eventName) {
+        alert("Rappel envoyé aux inscrits de " + eventName + " !");
+    }
+</script>
+</body>
+</html>
